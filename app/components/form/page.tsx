@@ -211,7 +211,7 @@ toast.error(message);
 
             <button
               type="submit"
-              className="w-full py-4 bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700 transition shadow-lg hover:shadow-xl"
+              className="w-full py-4 cursor-pointer bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700 transition shadow-lg hover:shadow-xl"
             >
               Submit Application
             </button>
