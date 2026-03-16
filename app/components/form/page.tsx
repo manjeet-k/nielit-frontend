@@ -174,7 +174,7 @@ toast.error(message);
                     name="tenthDmc"
                     onChange={handleFile}
                     className="text-black w-full  px-4 py-3 border border-gray-300 rounded-lg file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100 cursor-pointer"
-                    accept=".pdf,.jpg,.jpeg,.png"
+                    accept=".pdf"
                     required
                   />
                 </div>

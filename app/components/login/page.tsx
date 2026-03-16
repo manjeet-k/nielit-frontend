@@ -50,7 +50,9 @@ export default function Login() {
       }
     } catch (error:any) {
      toast.error(error?.response?.data?.message || "Something went wrong");
-    }
+    }finally {
+    setLoading(false);  
+  }
   };
 
   return (
