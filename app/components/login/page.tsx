@@ -14,6 +14,7 @@ export default function Login() {
   });
   const [showPassword, setShowPassword] = useState(false);
   const [loading,setLoading] = useState(false)
+  const [submitted, setSubmitted] = useState(false)
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setCredentials({ ...credentials, [e.target.name]: e.target.value });
@@ -21,6 +22,8 @@ export default function Login() {
 
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (loading || submitted) return;
+    setSubmitted(true);
     try {
       setLoading(true)
       const res = await axios.post(
@@ -31,28 +34,18 @@ export default function Login() {
           randomPassword: credentials.randomPassword,
         },
       );
-      setLoading(false)
 
       if (res.data.success) {
         toast.success(res.data.message);
-        setCredentials({
-          mobileNo: "",
-          randomId: "",
-          randomPassword: "",
-        });
         localStorage.setItem("studentToken", res.data.token);
-        setTimeout(() => {
-          router.push("/components/form");
-          
-          // window.location.href = "/components/form";
-        }, 1000);
-       
+        router.push("/components/form");
       }
     } catch (error:any) {
-     toast.error(error?.response?.data?.message || "Something went wrong");
-    }finally {
-    setLoading(false);  
-  }
+      toast.error(error?.response?.data?.message || "Something went wrong");
+      setTimeout(() => setSubmitted(false), 3000);
+    } finally {
+      setLoading(false);  
+    }
   };
 
   return (
@@ -157,7 +150,8 @@ export default function Login() {
 
           <button
             type="submit"
-            className="w-full py-3 cursor-pointer bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700 transition shadow-lg hover:shadow-xl"
+              disabled={loading || submitted}
+            className="w-full py-3 cursor-pointer bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700 transition shadow-lg hover:shadow-xl disabled:opacity-60 disabled:cursor-not-allowed"
           >
             {loading ? "Logging in..." : "Login"}
           </button>
