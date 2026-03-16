@@ -4,7 +4,7 @@ import React, { useState, useRef } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 
-export default function Home() {
+export default function HomeForm() {
   interface FormType {
     name: string;
     phone: string;
